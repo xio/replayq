@@ -1,23 +1,16 @@
-sudo: false
-
 language: erlang
-
-notifications:
-  email: false
-
 otp_release:
   - 21.0
   - 20.3
   - 19.3
-
+notifications:
+  email:
+    - maxim@synrc.com
 cache:
   directories:
   - "$HOME/.cache/rebar3"
-
 script:
- - make eunit
- - make edoc
- - make xref
- - make dialyzer
- - make cover
-
+  - "curl -fsSL https://raw.github.com/synrc/mad/master/mad > mad"
+  - "chmod +x mad"
+  - "./mad dep com"
+  - "rebar3 eunit -v"
